@@ -11,7 +11,7 @@ public class HRPulse {
         String name;
         String department;
         int performanceScore;
-        double salary;   // Added salary variable
+        double salary;
 
         LinkedList<String> attendanceHistory = new LinkedList<>();
 
@@ -140,7 +140,39 @@ public class HRPulse {
         }
     }
 
+    // =========================
+    // Department Wise Report
+    // =========================
+    static void departmentWiseReport() {
+
+        HashMap<String, List<Employee>> deptMap = new HashMap<>();
+
+        for (Employee e : employees.values()) {
+
+            if (!deptMap.containsKey(e.department)) {
+                deptMap.put(e.department, new ArrayList<>());
+            }
+
+            deptMap.get(e.department).add(e);
+        }
+
+        System.out.println("\n===== Department Wise Report =====");
+
+        for (String dept : deptMap.keySet()) {
+
+            System.out.println("\nDepartment: " + dept);
+
+            for (Employee e : deptMap.get(dept)) {
+                System.out.println("Name: " + e.name +
+                        " | Performance: " + e.performanceScore +
+                        " | Salary: " + e.salary);
+            }
+        }
+    }
+
+    // =========================
     // Main Method
+    // =========================
     public static void main(String[] args) {
 
         // Shift Schedule
@@ -187,5 +219,8 @@ public class HRPulse {
         employees.get(101).generateSalarySlip();
         employees.get(102).generateSalarySlip();
         employees.get(103).generateSalarySlip();
+
+        // Department Wise Report
+        departmentWiseReport();
     }
 }
