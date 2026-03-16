@@ -11,14 +11,16 @@ public class HRPulse {
         String name;
         String department;
         int performanceScore;
+        double salary;   // Added salary variable
 
         LinkedList<String> attendanceHistory = new LinkedList<>();
 
-        public Employee(int id, String name, String department, int performanceScore) {
+        public Employee(int id, String name, String department, int performanceScore, double salary) {
             this.id = id;
             this.name = name;
             this.department = department;
             this.performanceScore = performanceScore;
+            this.salary = salary;
         }
 
         void addAttendance(String record) {
@@ -30,6 +32,16 @@ public class HRPulse {
             for (String r : attendanceHistory) {
                 System.out.println(r);
             }
+        }
+
+        // Salary Slip Generation
+        void generateSalarySlip() {
+            System.out.println("\n------ Salary Slip ------");
+            System.out.println("Employee ID: " + id);
+            System.out.println("Name: " + name);
+            System.out.println("Department: " + department);
+            System.out.println("Salary: " + salary);
+            System.out.println("-------------------------");
         }
     }
 
@@ -61,8 +73,8 @@ public class HRPulse {
     static String[] shiftSchedule = new String[7];
 
     // Add Employee
-    static void addEmployee(int id, String name, String dept, int score) {
-        Employee e = new Employee(id, name, dept, score);
+    static void addEmployee(int id, String name, String dept, int score, double salary) {
+        Employee e = new Employee(id, name, dept, score, salary);
         employees.put(id, e);
     }
 
@@ -137,9 +149,9 @@ public class HRPulse {
         shiftSchedule[2] = "Night";
 
         // Add Employees
-        addEmployee(101, "Ravi", "IT", 85);
-        addEmployee(102, "Anita", "HR", 92);
-        addEmployee(103, "Rahul", "Finance", 78);
+        addEmployee(101, "Ravi", "IT", 85, 50000);
+        addEmployee(102, "Anita", "HR", 92, 60000);
+        addEmployee(103, "Rahul", "Finance", 78, 45000);
 
         // Search Employee
         searchEmployee(102);
@@ -170,5 +182,10 @@ public class HRPulse {
 
         // Sort Employees
         sortEmployeesByPerformance();
+
+        // Generate Salary Slips
+        employees.get(101).generateSalarySlip();
+        employees.get(102).generateSalarySlip();
+        employees.get(103).generateSalarySlip();
     }
 }
